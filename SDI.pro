@@ -57,7 +57,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 unix:!macx: LIBS += -L$$PWD/lib/ -lmariadbcpp
 
-QMAKE_RPATHDIR =+ $$ORIGIN/../lib
+QMAKE_RPATHDIR =+ $$PWD/lib/
 
 INCLUDEPATH += $$PWD/lib
 DEPENDPATH += $$PWD/lib

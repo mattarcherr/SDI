@@ -1,19 +1,18 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'logIn.h'
 **
-** Created by: The Qt Meta Object Compiler version 68 (Qt 6.2.3)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.8)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include <memory>
 #include "../src/main/logIn.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'logIn.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 68
-#error "This file was generated using the moc from 6.2.3. It"
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.12.8. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -22,18 +21,21 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_logIn_t {
-    const uint offsetsAndSize[10];
+    QByteArrayData data[5];
     char stringdata0[36];
 };
-#define QT_MOC_LITERAL(ofs, len) \
-    uint(offsetof(qt_meta_stringdata_logIn_t, stringdata0) + ofs), len 
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_logIn_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
 static const qt_meta_stringdata_logIn_t qt_meta_stringdata_logIn = {
     {
-QT_MOC_LITERAL(0, 5), // "logIn"
-QT_MOC_LITERAL(6, 8), // "swapPage"
-QT_MOC_LITERAL(15, 0), // ""
-QT_MOC_LITERAL(16, 5), // "check"
-QT_MOC_LITERAL(22, 13) // "createProfile"
+QT_MOC_LITERAL(0, 0, 5), // "logIn"
+QT_MOC_LITERAL(1, 6, 8), // "swapPage"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 5), // "check"
+QT_MOC_LITERAL(4, 22, 13) // "createProfile"
 
     },
     "logIn\0swapPage\0\0check\0createProfile"
@@ -43,7 +45,7 @@ QT_MOC_LITERAL(22, 13) // "createProfile"
 static const uint qt_meta_data_logIn[] = {
 
  // content:
-      10,       // revision
+       8,       // revision
        0,       // classname
        0,    0, // classinfo
        3,   14, // methods
@@ -53,10 +55,10 @@ static const uint qt_meta_data_logIn[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   32,    2, 0x08,    1 /* Private */,
-       3,    0,   33,    2, 0x08,    2 /* Private */,
-       4,    0,   34,    2, 0x08,    3 /* Private */,
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   29,    2, 0x08 /* Private */,
+       3,    0,   30,    2, 0x08 /* Private */,
+       4,    0,   31,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -70,7 +72,7 @@ void logIn::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         auto *_t = static_cast<logIn *>(_o);
-        (void)_t;
+        Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->swapPage(); break;
         case 1: _t->check(); break;
@@ -78,21 +80,15 @@ void logIn::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         default: ;
         }
     }
-    (void)_a;
+    Q_UNUSED(_a);
 }
 
-const QMetaObject logIn::staticMetaObject = { {
-    QMetaObject::SuperData::link<QMainWindow::staticMetaObject>(),
-    qt_meta_stringdata_logIn.offsetsAndSize,
+QT_INIT_METAOBJECT const QMetaObject logIn::staticMetaObject = { {
+    &QMainWindow::staticMetaObject,
+    qt_meta_stringdata_logIn.data,
     qt_meta_data_logIn,
     qt_static_metacall,
     nullptr,
-qt_incomplete_metaTypeArray<qt_meta_stringdata_logIn_t
-, QtPrivate::TypeAndForceComplete<logIn, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
-
-
->,
     nullptr
 } };
 
@@ -121,7 +117,7 @@ int logIn::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 3)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 3;
     }
     return _id;

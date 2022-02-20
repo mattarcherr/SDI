@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'logIn.ui'
 **
-** Created by: Qt User Interface Compiler version 6.2.3
+** Created by: Qt User Interface Compiler version 5.12.8
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -138,18 +138,18 @@ public:
 
     void retranslateUi(QMainWindow *logIn)
     {
-        logIn->setWindowTitle(QCoreApplication::translate("logIn", "logIn", nullptr));
-        passwordLabel->setText(QCoreApplication::translate("logIn", "Password", nullptr));
-        logInButton->setText(QCoreApplication::translate("logIn", "Log in", nullptr));
-        statusLabel->setText(QCoreApplication::translate("logIn", "status", nullptr));
-        usernameLabel->setText(QCoreApplication::translate("logIn", "Username", nullptr));
-        profilePageButton->setText(QCoreApplication::translate("logIn", "Create profile", nullptr));
-        profileStatusLabel->setText(QCoreApplication::translate("logIn", "status", nullptr));
-        profileUsernameLabel->setText(QCoreApplication::translate("logIn", "Enter your username", nullptr));
-        profileCreateButton->setText(QCoreApplication::translate("logIn", "Create Profile", nullptr));
-        profilePasswordLabel->setText(QCoreApplication::translate("logIn", "Enter your password", nullptr));
-        profileFullnameLabel->setText(QCoreApplication::translate("logIn", "Enter your full name", nullptr));
-        profileBackButton->setText(QCoreApplication::translate("logIn", "Back", nullptr));
+        logIn->setWindowTitle(QApplication::translate("logIn", "logIn", nullptr));
+        passwordLabel->setText(QApplication::translate("logIn", "Password", nullptr));
+        logInButton->setText(QApplication::translate("logIn", "Log in", nullptr));
+        statusLabel->setText(QApplication::translate("logIn", "status", nullptr));
+        usernameLabel->setText(QApplication::translate("logIn", "Username", nullptr));
+        profilePageButton->setText(QApplication::translate("logIn", "Create profile", nullptr));
+        profileStatusLabel->setText(QApplication::translate("logIn", "status", nullptr));
+        profileUsernameLabel->setText(QApplication::translate("logIn", "Enter your username", nullptr));
+        profileCreateButton->setText(QApplication::translate("logIn", "Create Profile", nullptr));
+        profilePasswordLabel->setText(QApplication::translate("logIn", "Enter your password", nullptr));
+        profileFullnameLabel->setText(QApplication::translate("logIn", "Enter your full name", nullptr));
+        profileBackButton->setText(QApplication::translate("logIn", "Back", nullptr));
     } // retranslateUi
 
 };
