@@ -16,7 +16,9 @@ public:
     ~logIn();
     
 private slots:
+    void swapPage();
     void check();
+    void createProfile();
 
 private:
     Ui::logIn *ui;

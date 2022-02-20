@@ -19,19 +19,21 @@ public:
     QString select(std::string needed_field, QString givenField, QString givenValue);
     database();
     ~database();
+private:
+    std::shared_ptr<sql::Connection> con;
 };
 
-class shared {
-public:
-    std::shared_ptr<sql::Connection> conn;
-};
+//class shared {
+//public:
+//    std::shared_ptr<sql::Connection> conn;
+//};
 
-shared share;
+//shared share;
 bool cnst_failed = false;
 
 bool database::remove(QString userName) {
     try {
-        std::unique_ptr<sql::PreparedStatement> stmnt(share.conn->prepareStatement("delete from profile where userName = ?"));
+        std::unique_ptr<sql::PreparedStatement> stmnt(this->con->prepareStatement("delete from profile where userName = ?"));
         stmnt->setString(1, userName.toStdString());
         stmnt->executeQuery();
         return 1;
@@ -45,7 +47,7 @@ bool database::remove(QString userName) {
 bool database::update(std::string field, QString oldValue, QString newValue) {
     try {
         // Create a new PreparedStatement
-        std::unique_ptr<sql::PreparedStatement> stmnt(share.conn->prepareStatement("update profile set ? = ? where id = ?"));
+        std::unique_ptr<sql::PreparedStatement> stmnt(this->con->prepareStatement("update profile set ? = ? where id = ?"));
         // Bind values to SQL statement
         stmnt->setString(1, field);
         stmnt->setString(2, oldValue.toStdString());
@@ -63,7 +65,7 @@ bool database::update(std::string field, QString oldValue, QString newValue) {
 int database::add(QString fullName, QString userName, QString password, QString role)
 {
     try {
-        std::unique_ptr<sql::PreparedStatement> stmnt(share.conn->prepareStatement("insert into profile (fullName, userName, password, role) values (?,?,?,?)"));
+        std::unique_ptr<sql::PreparedStatement> stmnt(this->con->prepareStatement("insert into profile (fullName, userName, password, role) values (?,?,?,?)"));
         stmnt->setString(1, fullName.toStdString());
         stmnt->setString(2, userName.toStdString());
         stmnt->setString(3, password.toStdString());
@@ -77,9 +79,10 @@ int database::add(QString fullName, QString userName, QString password, QString 
    }
 }
 
-QString select (std::string needed_field, QString givenField, QString givenValue) {
+QString database::select (std::string needed_field, QString givenField, QString givenValue)
+{
     try {
-        std::unique_ptr<sql::PreparedStatement> stmnt(share.conn->prepareStatement("select ? from profile where ? = ?"));
+        std::unique_ptr<sql::PreparedStatement> stmnt(this->con->prepareStatement("select ? from profile where ? = ?"));
         stmnt->setString(1, needed_field);
         stmnt->setString(2, givenField.toStdString());
         stmnt->setString(3, givenValue.toStdString());
@@ -102,7 +105,7 @@ QString select (std::string needed_field, QString givenField, QString givenValue
 int database::check(QString userName, QString password) {
     try {
         if(password.isEmpty()){
-            std::unique_ptr<sql::PreparedStatement> stmnt(share.conn->prepareStatement("select exists(select * from profile where userName=?)"));
+            std::unique_ptr<sql::PreparedStatement> stmnt(this->con->prepareStatement("select exists(select * from profile where userName=?)"));
             stmnt->setString(1, userName.toStdString());
             sql::ResultSet *res = stmnt->executeQuery();
 
@@ -114,7 +117,7 @@ int database::check(QString userName, QString password) {
             else { return 0; }
         }
         else{
-            std::unique_ptr<sql::PreparedStatement> stmnt(share.conn->prepareStatement("select password from profile where userName=?"));
+            std::unique_ptr<sql::PreparedStatement> stmnt(this->con->prepareStatement("select password from profile where userName=?"));
             stmnt->setString(1, userName.toStdString());
             sql::ResultSet *res = stmnt->executeQuery();
             res->next();
@@ -142,7 +145,7 @@ database::database()
         sql::Properties properties({{"user", "remote"}, {"password", "1234"}});
 
         std::shared_ptr<sql::Connection> conn(driver->connect(url, properties));
-        share.conn = conn;
+        this->con = conn;
 
         qDebug() << "DB connection made";
     }
@@ -156,7 +159,7 @@ database::database()
 database::~database()
 {
     if (!cnst_failed){
-        share.conn->close();
+        this->con->close();
         qDebug() << "DB connection closed";
     }
 }

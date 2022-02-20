@@ -11,12 +11,26 @@ logIn::logIn(QWidget *parent)
     ui->setupUi(this);
     
     ui->statusLabel->setVisible(false);
+    ui->profileStatusLabel->setVisible(false);
+    ui->stackedWidget->setCurrentIndex(0);
+
     connect(ui->logInButton, &QPushButton::clicked, this, &logIn::check);
+    connect(ui->profileCreateButton, &QPushButton::clicked, this, &logIn::createProfile);
+    connect(ui->profilePageButton, &QPushButton::clicked, this, &logIn::swapPage);
+    connect(ui->profileBackButton, &QPushButton::clicked, this, &logIn::swapPage);
 }
 
 logIn::~logIn()
 {
     delete ui;
+}
+
+void logIn::swapPage()
+{
+    if (ui->stackedWidget->currentIndex() == 0){
+        ui->stackedWidget->setCurrentIndex(1);
+    }
+    else { ui->stackedWidget->setCurrentIndex(0); }
 }
 
 void logIn::check()
@@ -47,5 +61,31 @@ void logIn::check()
     qDebug() << "username is incorrect";
     ui->statusLabel->setVisible(true);
     ui->statusLabel->setText("Username is incorrect");
+    return;
+}
+
+void logIn::createProfile()
+{
+    if(ui->profileFullnameInput->text() =="" || ui->profileUsernameInput->text()=="" || ui->profilePasswordInput->text()=="") {
+        ui->profileStatusLabel->setVisible(true);
+        ui->profileStatusLabel->setText("Field cannot be blank");
+        return;
+    }
+    database con;
+    if (cnst_failed) {
+        ui->profileStatusLabel->setVisible(true);
+        ui->profileStatusLabel->setText("Database connection failed");
+        return;
+    }
+    cnst_failed = false;
+    if(!con.check(ui->profileUsernameInput->text(),"")){
+        if(con.add(ui->profileFullnameInput->text(),ui->profileUsernameInput->text(),ui->profilePasswordInput->text(),"user") == 1){
+            ui->profileStatusLabel->setVisible(true);
+            ui->profileStatusLabel->setText("Profile successfully created");
+            return;
+        }
+    }
+    ui->profileStatusLabel->setVisible(true);
+    ui->profileStatusLabel->setText("Username already in use");
     return;
 }
