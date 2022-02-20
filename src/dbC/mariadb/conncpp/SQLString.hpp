@@ -29,8 +29,8 @@ namespace sql
 {
 class StringImp;
 
-#pragma warning(push)
-#pragma warning(disable:4251)
+//#pragma warning(push)
+//#pragma warning(disable:4251)
 
 class MARIADB_EXPORTED SQLString final {
 
@@ -108,5 +108,5 @@ inline bool operator!=(const std::string& str1, const SQLString& str2) { return 
 
 MARIADB_EXPORTED std::ostream& operator<<(std::ostream& stream, const SQLString& str);
 }
-#pragma warning(pop)
+//#pragma warning(pop)
 #endif
