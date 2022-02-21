@@ -39,7 +39,7 @@ COMPRESS      = gzip -9f
 DISTNAME      = SDI1.0.0
 DISTDIR = /home/ntu-user/Documents/SDI/build/.tmp/SDI1.0.0
 LINK          = g++
-LFLAGS        = -Wl,-z,origin -Wl,-rpath,\$$ORIGIN/+ -Wl,-rpath,/home/ntu-user/Documents/SDI/lib/
+LFLAGS        = -Wl,-rpath=$$PWD../lib,--disable-new-dtags -Wl,-z,origin -Wl,-rpath,\$$ORIGIN/+ -Wl,-rpath,/home/ntu-user/Documents/SDI/lib
 LIBS          = $(SUBLIBS) -L/home/ntu-user/Documents/SDI/lib/ -lmariadbcpp /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
 AR            = ar cqs
 RANLIB        = 
@@ -387,7 +387,7 @@ compiler_moc_header_clean:
 moc_logIn.cpp: ../src/main/logIn.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/ntu-user/Documents/SDI/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ntu-user/Documents/SDI -I/home/ntu-user/Documents/SDI/lib -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11.2.0 -I/usr/include/c++/11.2.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.2.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.2.0/include-fixed -I/usr/include ../src/main/logIn.h -o moc_logIn.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/ntu-user/Documents/SDI/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ntu-user/Documents/SDI -I/home/ntu-user/Documents/SDI/lib -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/main/logIn.h -o moc_logIn.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
