@@ -141,7 +141,7 @@ database::database()
         cnst_failed = false;
         sql::Driver* driver = sql::mariadb::get_driver_instance();
 
-        sql::SQLString url("jdbc:mariadb://192.168.0.72:3306/SDI");
+        sql::SQLString url("jdbc:mariadb://82.7.78.157:3306/SDI");
         sql::Properties properties({{"user", "remote"}, {"password", "1234"}});
 
         std::shared_ptr<sql::Connection> conn(driver->connect(url, properties));

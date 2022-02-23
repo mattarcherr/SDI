@@ -53,10 +53,14 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../src/main/logIn.cpp \
-		../src/main/main.cpp moc_logIn.cpp
+		../src/main/main.cpp \
+		../src/main/mainwindow.cpp moc_logIn.cpp \
+		moc_mainwindow.cpp
 OBJECTS       = logIn.o \
 		main.o \
-		moc_logIn.o
+		mainwindow.o \
+		moc_logIn.o \
+		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -160,8 +164,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../src/dbC/mariadb/conncpp/compat/SQLType.hpp \
 		../src/dbC/mariadb/conncpp/compat/Struct.hpp \
 		../src/dbC/mariadb/conncpp/jdbccompat.hpp \
-		../src/main/logIn.h ../src/main/logIn.cpp \
-		../src/main/main.cpp
+		../src/main/logIn.h \
+		../src/main/mainwindow.h ../src/main/logIn.cpp \
+		../src/main/main.cpp \
+		../src/main/mainwindow.cpp
 QMAKE_TARGET  = SDI
 DESTDIR       = 
 TARGET        = SDI
@@ -170,7 +176,7 @@ TARGET        = SDI
 first: all
 ####### Build rules
 
-SDI: ui_logIn.h $(OBJECTS)  
+SDI: ui_logIn.h ui_mainwindow.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../SDI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -347,9 +353,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/dbC/dbC.h ../src/dbC/mariadb/conncpp.hpp ../src/dbC/mariadb/conncpp/CArray.hpp ../src/dbC/mariadb/conncpp/CallableStatement.hpp ../src/dbC/mariadb/conncpp/Connection.hpp ../src/dbC/mariadb/conncpp/DatabaseMetaData.hpp ../src/dbC/mariadb/conncpp/Driver.hpp ../src/dbC/mariadb/conncpp/DriverManager.hpp ../src/dbC/mariadb/conncpp/Exception.hpp ../src/dbC/mariadb/conncpp/ParameterMetaData.hpp ../src/dbC/mariadb/conncpp/PreparedStatement.hpp ../src/dbC/mariadb/conncpp/ResultSet.hpp ../src/dbC/mariadb/conncpp/ResultSetMetaData.hpp ../src/dbC/mariadb/conncpp/SQLString.hpp ../src/dbC/mariadb/conncpp/Savepoint.hpp ../src/dbC/mariadb/conncpp/Statement.hpp ../src/dbC/mariadb/conncpp/Types.hpp ../src/dbC/mariadb/conncpp/Warning.hpp ../src/dbC/mariadb/conncpp/buildconf.hpp ../src/dbC/mariadb/conncpp/compat/Array.hpp ../src/dbC/mariadb/conncpp/compat/Executor.hpp ../src/dbC/mariadb/conncpp/compat/Object.hpp ../src/dbC/mariadb/conncpp/compat/SQLType.hpp ../src/dbC/mariadb/conncpp/compat/Struct.hpp ../src/dbC/mariadb/conncpp/jdbccompat.hpp ../src/main/logIn.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/main/logIn.cpp ../src/main/main.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/main/logIn.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/dbC/dbC.h ../src/dbC/mariadb/conncpp.hpp ../src/dbC/mariadb/conncpp/CArray.hpp ../src/dbC/mariadb/conncpp/CallableStatement.hpp ../src/dbC/mariadb/conncpp/Connection.hpp ../src/dbC/mariadb/conncpp/DatabaseMetaData.hpp ../src/dbC/mariadb/conncpp/Driver.hpp ../src/dbC/mariadb/conncpp/DriverManager.hpp ../src/dbC/mariadb/conncpp/Exception.hpp ../src/dbC/mariadb/conncpp/ParameterMetaData.hpp ../src/dbC/mariadb/conncpp/PreparedStatement.hpp ../src/dbC/mariadb/conncpp/ResultSet.hpp ../src/dbC/mariadb/conncpp/ResultSetMetaData.hpp ../src/dbC/mariadb/conncpp/SQLString.hpp ../src/dbC/mariadb/conncpp/Savepoint.hpp ../src/dbC/mariadb/conncpp/Statement.hpp ../src/dbC/mariadb/conncpp/Types.hpp ../src/dbC/mariadb/conncpp/Warning.hpp ../src/dbC/mariadb/conncpp/buildconf.hpp ../src/dbC/mariadb/conncpp/compat/Array.hpp ../src/dbC/mariadb/conncpp/compat/Executor.hpp ../src/dbC/mariadb/conncpp/compat/Object.hpp ../src/dbC/mariadb/conncpp/compat/SQLType.hpp ../src/dbC/mariadb/conncpp/compat/Struct.hpp ../src/dbC/mariadb/conncpp/jdbccompat.hpp ../src/main/logIn.h ../src/main/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/main/logIn.cpp ../src/main/main.cpp ../src/main/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/main/logIn.ui ../src/main/mainwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -381,24 +387,33 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_logIn.cpp
+compiler_moc_header_make_all: moc_logIn.cpp moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_logIn.cpp
+	-$(DEL_FILE) moc_logIn.cpp moc_mainwindow.cpp
 moc_logIn.cpp: ../src/main/logIn.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/ntu-user/Documents/SDI/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ntu-user/Documents/SDI -I/home/ntu-user/Documents/SDI/lib -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/main/logIn.h -o moc_logIn.cpp
 
+moc_mainwindow.cpp: ../src/main/mainwindow.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/ntu-user/Documents/SDI/build/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/ntu-user/Documents/SDI -I/home/ntu-user/Documents/SDI/lib -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/main/mainwindow.h -o moc_mainwindow.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_logIn.h
+compiler_uic_make_all: ui_logIn.h ui_mainwindow.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_logIn.h
+	-$(DEL_FILE) ui_logIn.h ui_mainwindow.h
 ui_logIn.h: ../src/main/logIn.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../src/main/logIn.ui -o ui_logIn.h
+
+ui_mainwindow.h: ../src/main/mainwindow.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../src/main/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -434,14 +449,22 @@ logIn.o: ../src/main/logIn.cpp ../src/main/logIn.h \
 		../src/dbC/mariadb/conncpp/ParameterMetaData.hpp \
 		../src/dbC/mariadb/conncpp/CallableStatement.hpp \
 		../src/dbC/mariadb/conncpp/Types.hpp \
-		../src/dbC/mariadb/conncpp/Exception.hpp
+		../src/dbC/mariadb/conncpp/Exception.hpp \
+		../src/main/mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o logIn.o ../src/main/logIn.cpp
 
 main.o: ../src/main/main.cpp ../src/main/logIn.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main/main.cpp
 
+mainwindow.o: ../src/main/mainwindow.cpp ../src/main/mainwindow.h \
+		ui_mainwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../src/main/mainwindow.cpp
+
 moc_logIn.o: moc_logIn.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_logIn.o moc_logIn.cpp
+
+moc_mainwindow.o: moc_mainwindow.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
 ####### Install
 

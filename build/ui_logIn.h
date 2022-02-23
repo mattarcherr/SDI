@@ -11,13 +11,11 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,7 +23,6 @@ QT_BEGIN_NAMESPACE
 class Ui_logIn
 {
 public:
-    QWidget *centralwidget;
     QStackedWidget *stackedWidget;
     QWidget *LogIn;
     QLineEdit *passwordInput;
@@ -45,19 +42,15 @@ public:
     QLabel *profileFullnameLabel;
     QLineEdit *profileFullnameInput;
     QPushButton *profileBackButton;
-    QMenuBar *menubar;
-    QStatusBar *statusbar;
 
-    void setupUi(QMainWindow *logIn)
+    void setupUi(QDialog *logIn)
     {
         if (logIn->objectName().isEmpty())
             logIn->setObjectName(QString::fromUtf8("logIn"));
         logIn->resize(800, 600);
-        centralwidget = new QWidget(logIn);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        stackedWidget = new QStackedWidget(centralwidget);
+        stackedWidget = new QStackedWidget(logIn);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        stackedWidget->setGeometry(QRect(0, -1, 801, 581));
+        stackedWidget->setGeometry(QRect(0, 0, 801, 601));
         LogIn = new QWidget();
         LogIn->setObjectName(QString::fromUtf8("LogIn"));
         passwordInput = new QLineEdit(LogIn);
@@ -83,7 +76,7 @@ public:
         usernameLabel->setAlignment(Qt::AlignCenter);
         profilePageButton = new QPushButton(LogIn);
         profilePageButton->setObjectName(QString::fromUtf8("profilePageButton"));
-        profilePageButton->setGeometry(QRect(340, 350, 84, 31));
+        profilePageButton->setGeometry(QRect(320, 350, 121, 31));
         stackedWidget->addWidget(LogIn);
         CreateProfile = new QWidget();
         CreateProfile->setObjectName(QString::fromUtf8("CreateProfile"));
@@ -103,7 +96,7 @@ public:
         profilePasswordInput->setGeometry(QRect(320, 290, 121, 31));
         profileCreateButton = new QPushButton(CreateProfile);
         profileCreateButton->setObjectName(QString::fromUtf8("profileCreateButton"));
-        profileCreateButton->setGeometry(QRect(340, 340, 84, 31));
+        profileCreateButton->setGeometry(QRect(320, 340, 121, 31));
         profilePasswordLabel = new QLabel(CreateProfile);
         profilePasswordLabel->setObjectName(QString::fromUtf8("profilePasswordLabel"));
         profilePasswordLabel->setGeometry(QRect(310, 250, 141, 23));
@@ -119,14 +112,6 @@ public:
         profileBackButton->setObjectName(QString::fromUtf8("profileBackButton"));
         profileBackButton->setGeometry(QRect(340, 430, 84, 31));
         stackedWidget->addWidget(CreateProfile);
-        logIn->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(logIn);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 20));
-        logIn->setMenuBar(menubar);
-        statusbar = new QStatusBar(logIn);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        logIn->setStatusBar(statusbar);
 
         retranslateUi(logIn);
 
@@ -136,7 +121,7 @@ public:
         QMetaObject::connectSlotsByName(logIn);
     } // setupUi
 
-    void retranslateUi(QMainWindow *logIn)
+    void retranslateUi(QDialog *logIn)
     {
         logIn->setWindowTitle(QApplication::translate("logIn", "logIn", nullptr));
         passwordLabel->setText(QApplication::translate("logIn", "Password", nullptr));
