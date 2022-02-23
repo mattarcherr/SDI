@@ -1,15 +1,16 @@
 #include "logIn.h"
 #include "ui_logIn.h"
-#include <QDebug>
 
-#include "src/dbC/dbC.h"
+#include "../dbC/dbC.h"
+
+#include "mainwindow.h"
 
 logIn::logIn(QWidget *parent)
-    : QMainWindow(parent)
+    : QDialog(parent)
     , ui(new Ui::logIn)
 {
     ui->setupUi(this);
-    
+
     ui->statusLabel->setVisible(false);
     ui->profileStatusLabel->setVisible(false);
     ui->stackedWidget->setCurrentIndex(0);
@@ -18,11 +19,7 @@ logIn::logIn(QWidget *parent)
     connect(ui->profileCreateButton, &QPushButton::clicked, this, &logIn::createProfile);
     connect(ui->profilePageButton, &QPushButton::clicked, this, &logIn::swapPage);
     connect(ui->profileBackButton, &QPushButton::clicked, this, &logIn::swapPage);
-}
 
-logIn::~logIn()
-{
-    delete ui;
 }
 
 void logIn::swapPage()
@@ -51,6 +48,8 @@ void logIn::check()
         if(con.check(ui->usernameInput->text(),ui->passwordInput->text()) == 1){
             ui->statusLabel->setVisible(true);
             ui->statusLabel->setText("Logging in");
+            accept();
+            logIn::mainWindow();
             return;
         }
         qDebug() << "username and password do not match";
@@ -89,3 +88,15 @@ void logIn::createProfile()
     ui->profileStatusLabel->setText("Username already in use");
     return;
 }
+
+void logIn::mainWindow()
+{
+    MainWindow* window = new MainWindow;
+    window->show();
+}
+
+logIn::~logIn()
+{
+    delete ui;
+}
+

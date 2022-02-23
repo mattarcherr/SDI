@@ -17,7 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/main/logIn.cpp \
-    src/main/main.cpp
+    src/main/main.cpp \
+    src/main/mainwindow.cpp
 
 HEADERS += \
     src/dbC/dbC.h \
@@ -45,10 +46,12 @@ HEADERS += \
     src/dbC/mariadb/conncpp/compat/SQLType.hpp \
     src/dbC/mariadb/conncpp/compat/Struct.hpp \
     src/dbC/mariadb/conncpp/jdbccompat.hpp \
-    src/main/logIn.h
+    src/main/logIn.h \
+    src/main/mainwindow.h
 
 FORMS += \
-    src/main/logIn.ui
+    src/main/logIn.ui \
+    src/main/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
